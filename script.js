@@ -1,85 +1,75 @@
 let prev = document.querySelector('.prev'),
 next = document.querySelector('.next'),
-dots = document.querySelectorAll('.dot'),
-Imgs = document.querySelectorAll('.carousel-img'),
-caps = document.querySelectorAll('.carousel-caption');
+dots = document.getElementsByClassName('dot'),
+imgs = document.getElementsByClassName('carousel-img'),
+caps = document.getElementsByClassName('carousel-caption');
 
-let imgTotal = Imgs.length;
-let Imgposition = 0
+let imgTotal = imgs.length;
+let imgPosition = 0;
 
-
-function updateImg(){
-for(let img of Imgs){
-    img.classList.remove('visible')
-    img.classList.add('hidden')
+function updateImg() {
+ // imags
+for(let img of imgs) {
+  img.classList.remove('visible');
+  img.classList.add('hidden');
 }
-Imgs[Imgposition].classList.remove('hidden')
-};
+imgs[imgPosition].classList.remove('hidden');
 
-
+// dots
 for (let dot of dots) {
-    dot.className = dot.className.replace('active','')
+ dot.className = dot.className.replace('active', '');
 }
-dots[Imgposition].classList.add('active');
+dots[imgPosition].classList.add('active');
 
-
-for (let cap of caps ) {
-   cap.classList.remove('visible')
-   cap.classList.add('hidden')
+//display slide
+for(let cap of caps){
+ cap.classList.remove('visible');
+ cap.classList.add('hidden');
 }
-caps[Imgposition].classList.remove('hidden');
+caps[imgPosition].classList.remove('hidden');
 
-
-function nextImg(){
-if(Imgposition === imgTotal - 1 ){
-    Imgposition = 0
-}else{
-Imgposition++
 }
-updateImg()
-console.log('Imgposition:', Imgposition);
-};
 
+function nextImg() {
+ imgPosition === imgTotal - 1 ? imgPosition = 0 : imgPosition++;
+updateImg();
+}
 
 function prevImg() {
-    if(Imgposition === 0){
-      Imgposition = imgTotal -1  
-    }else {
-        Imgposition--
-      }
-    updateImg()
-    console.log('Imgposition:', Imgposition);
-};
-
-
+ imgPosition === 0 ? imgPosition = imgTotal - 1 : imgPosition--;
+ updateImg();
+}
 
 prev.addEventListener('click', prevImg);
 next.addEventListener('click', nextImg);
 
 
-
 let prev1 = document.querySelector('.prev1'),
 next1 = document.querySelector('.next1'),
 dots1 = document.getElementsByClassName('dot1'),
+imgs1 = document.getElementsByClassName('carousel-img1'),
 trakerImgs = document.querySelector('.slider-list'),
-Imgs1 = document.getElementsByClassName('carousel-img1'),
-container = document.querySelector('.carousel-container');
+container = document.querySelector('.slider-container');
 
-let imgTotal1 = Imgs1.length,
+let imgTotal1 = imgs1.length,
 sliderToShow = 1,
 sliderToScroll = 1,
 Imgposition1 = 0;
-
 let sliderWidth = container.clientWidth/sliderToShow;
 
+
 prev1.addEventListener('click', (event) => {
-    Imgposition1 -= sliderWidth;
-    setPosition()
+Imgposition1 += sliderWidth;
+setPosition()
+checkBtns()
+upd()
 })
 
 next1.addEventListener('click', (event) =>{
-Imgposition1 += sliderWidth
+Imgposition1 -= sliderWidth
 setPosition()
+checkBtns()
+upd()
 })
 
 const setPosition = function() {
@@ -88,6 +78,20 @@ trakerImgs.style.transform = `translateX(${Imgposition1}px)`
 
 
 const checkBtns = function() {
-    prev1 = Imgs1
-    setPosition()
+
+  prev1.disabled = Imgposition1 === 0 
+  next1.disabled = Imgposition1 <= -(imgTotal1 * sliderWidth) + sliderWidth
+    
 }
+
+
+let upd = function(){
+
+for (let dot1 of dots1) {
+[...dots1].forEach((item),i => {
+
+})
+}
+
+}
+
